@@ -1,11 +1,11 @@
 import { HtmlTagDescriptor, ResolvedConfig, Plugin, loadEnv } from "vite";
 
-interface GetChildrenOptions {
+interface GetScriptOptions {
   mode: string;
   variables: string | string[];
 }
 
-function getScript({ mode, variables }: GetChildrenOptions) {
+function getScript({ mode, variables }: GetScriptOptions) {
   const scriptLines = ["window._env_={"];
 
   if (mode === "production") {
