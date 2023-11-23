@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc src/index.ts src/getRuntimeEnv.ts src/runtimeEnvScript.ts --declaration --emitDeclarationOnly",
     "dev": "tsc -w"
   },
   "repository": {
@@ -33,7 +33,10 @@
     "@types/node": "^20.9.4",
     "typescript": "^5.3.2"
   },
+  "peerDependencies": {
+    "vite": "^4.3.2"
+  },
   "dependencies": {
-    "vite": "^5.0.2"
+    "vite": "^4.3.2"
   }
 }
