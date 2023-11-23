@@ -1,0 +1,35 @@
+{
+  "name": "vite-runtime-env-script-plugin",
+  "author": "Mark X",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mvpkx/vite-runtime-env-script-plugin.git"
+  },
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "env",
+    "runtime",
+    "docker",
+    "build"
+  ],
+  "files": [
+    "dist/src"
+  ],
+  "main": "./dist/src/index.js",
+  "exports": "./dist/src/index.js",
+  "bugs": {
+    "url": "https://github.com/mvpkx/vite-runtime-env-script-plugin/issues"
+  },
+  "homepage": "https://github.com/mvpkx/vite-runtime-env-script-plugin#readme",
+  "devDependencies": {
+    "typescript": "^5.3.2",
+    "vite": "^5.0.2"
+  }
+}
