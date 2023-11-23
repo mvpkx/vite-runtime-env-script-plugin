@@ -1,7 +1,7 @@
 {
   "name": "vite-runtime-env-script-plugin",
   "author": "Mark X",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "scripts": {
     "build": "tsup src/index.ts src/getRuntimeEnv.ts src/runtimeEnvScript.ts --dts",
