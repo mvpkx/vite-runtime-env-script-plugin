@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/mvpkx/vite-runtime-env-script-plugin#readme",
   "devDependencies": {
+    "@types/node": "^20.9.4",
     "typescript": "^5.3.2",
     "vite": "^5.0.2"
   }
