@@ -1,7 +1,7 @@
 {
   "name": "vite-runtime-env-script-plugin",
   "author": "Mark X",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "license": "MIT",
   "scripts": {
     "build": "tsup src/index.ts src/getRuntimeEnv.ts --dts --format cjs,esm"
@@ -21,10 +21,10 @@
   "files": [
     "/dist"
   ],
-  "main": "./dist/runtimeEnvScript.js",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/runtimeEnvScript.js",
+    ".": "./dist/index.js",
     "./getRuntimeEnv": "./dist/getRuntimeEnv.js"
   },
   "bugs": {
