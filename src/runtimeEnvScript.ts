@@ -2,56 +2,43 @@ import { HtmlTagDescriptor, ResolvedConfig, Plugin, loadEnv } from "vite";
 
 interface GetChildrenOptions {
   mode: string;
-  html: boolean;
-  envPrefix?: string | string[];
+  variables: string | string[];
 }
 
-function getChildren({ mode, html, envPrefix }: GetChildrenOptions) {
-  const env = loadEnv(mode, process.cwd(), envPrefix);
+function getScript({ mode, variables }: GetChildrenOptions) {
+  const scriptLines = ["window._env_={"];
 
-  const envScript = ["window._env_={"];
-
-  for (let key in env) {
-    const value = html ? JSON.stringify(env[key]) : `\$${key}`;
-    envScript.push(`['${key}']: ${value},`);
+  if (mode === "production") {
+    for (let i = 0; i < variables.length; i++) {
+      scriptLines.push(`['${variables[i]}']: '\${${variables[i]}}',`);
+    }
+  } else {
+    const env = loadEnv(mode, process.cwd(), variables);
+    for (let key in env) {
+      scriptLines.push(`['${key}']: ${JSON.stringify(env[key])},`);
+    }
   }
 
-  return [...envScript, "}"].join("");
+  return [...scriptLines, "}"].join("");
 }
+
 export interface PluginOptions {
   /**
-   * List of environment variable prefixes (case-sensitive).
-   * @example ['VITE']
+   * List of environment variables or variable prefixes (case-sensitive).
+   * @example ['BASE_URL'] | ['VITE']
    */
-  envPrefix?: string | string[];
-  prod?: {
-    /**
-     * JS file name.
-     * @default "runtime-env.js"
-     */
-    src?: string;
-    /**
-     * Build mode.
-     * @default "production"
-     */
-    mode?: string;
-    /**
-     * Additional script element attributes.
-     */
-    attrs?: HtmlTagDescriptor["attrs"];
-  };
+  variables: string | string[];
+  /**
+   * JS file name.
+   * @default "runtime-env.js"
+   */
+  filename?: string;
 }
 
-export function runtimeEnvScript(options?: PluginOptions): Plugin {
-  const { envPrefix, prod }: PluginOptions = {
-    prod: {
-      src: "runtime-env.js",
-      mode: "production",
-      ...options?.prod,
-    },
-    ...options,
-  };
-
+export function runtimeEnvScript({
+  variables,
+  filename = "runtime-env.js",
+}: PluginOptions): Plugin {
   let config: ResolvedConfig;
 
   return {
@@ -65,28 +52,27 @@ export function runtimeEnvScript(options?: PluginOptions): Plugin {
     transformIndexHtml() {
       const htmlTag: HtmlTagDescriptor = { tag: "script" };
 
-      if (config.mode === prod.mode) {
-        htmlTag.attrs = { src: prod.src, ...prod.attrs };
+      if (config.mode === "production") {
+        htmlTag.attrs = { src: filename };
       } else {
-        htmlTag.children = getChildren({
+        htmlTag.children = getScript({
           mode: config.mode,
-          envPrefix,
-          html: false,
+          variables,
         });
       }
+
       return [htmlTag];
     },
 
     generateBundle() {
-      const templateContent = getChildren({
+      const templateContent = getScript({
         mode: config.mode,
-        envPrefix,
-        html: true,
+        variables,
       });
 
       this.emitFile({
         type: "asset",
-        fileName: prod.src,
+        fileName: `template-${filename}`,
         source: templateContent,
       });
     },
