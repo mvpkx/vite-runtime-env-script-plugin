@@ -1,4 +1,5 @@
-import { HtmlTagDescriptor, ResolvedConfig, Plugin, loadEnv } from "vite";
+import { loadEnv } from "vite";
+import type { Plugin, ResolvedConfig, HtmlTagDescriptor } from "vite";
 
 interface GetScriptOptions {
   mode: string;
