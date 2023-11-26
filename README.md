@@ -1,5 +1,15 @@
 # vite-runtime-env-script-plugin
 
+## Installation
+
+```console
+yarn add vite-runtime-env-script-plugin
+```
+
+```console
+npm install vite-runtime-env-script-plugin
+```
+
 ## Usage
 
 Add `runtimeEnvScript` plugin to `vite.config.js / vite.config.ts` and provide a list of environment variable names:
@@ -16,7 +26,7 @@ export default {
 To access the environment variables use the built-in getter:
 
 ```ts
-import {getRuntimeEnv} from 'vite-runtime-env-script-plugin/getRuntimeEnv'
+import { getRuntimeEnv } from "vite-runtime-env-script-plugin/getRuntimeEnv";
 
 const baseURL = getRuntimeEnv("BASE_URL");
 ```
