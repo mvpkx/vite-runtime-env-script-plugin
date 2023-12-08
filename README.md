@@ -1,5 +1,7 @@
 # vite-runtime-env-script-plugin
 
+A plugin created to simplify the deployment process: there is no need to build a docker image every time you change environment variables.
+
 ## Installation
 
 ```console
