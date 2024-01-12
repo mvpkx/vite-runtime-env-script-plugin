@@ -11,7 +11,7 @@
     "resolveJsonModule": true,
     "rootDir": ".",
     "baseUrl": "src",
-    "outDir": "dist",
+    "outDir": "dist1",
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "paths": {

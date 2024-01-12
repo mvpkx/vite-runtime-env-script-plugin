@@ -54,7 +54,7 @@ export function runtimeEnvScript({
       const htmlTag: HtmlTagDescriptor = { tag: "script" };
 
       if (config.mode === "production") {
-        htmlTag.attrs = { src: filename };
+        htmlTag.attrs = { src: `/${filename}` };
       } else {
         htmlTag.children = getScript({
           mode: config.mode,
